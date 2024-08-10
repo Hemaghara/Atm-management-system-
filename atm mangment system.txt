@@ -1,0 +1,92 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        ATM sbi = new ATM();
+        int total_balance = 10000;
+
+        while (true) {
+            System.out.println("ATM Menu:");
+            System.out.println("1. Withdraw your money");
+            System.out.println("2. Deposit your money");
+            System.out.println("3. Check balance from the account");
+            System.out.println("4. Exit");
+
+            System.out.println("Please enter your choice:");
+            int choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    total_balance = sbi.withdrawMoney(total_balance);
+                    break;
+
+                case 2:
+                    total_balance = sbi.depositMoney(total_balance);
+                    break;
+
+                case 3:
+                    sbi.checkBalance(total_balance);
+                    break;
+
+                case 4:
+                    sbi.exit();
+                    System.exit(0);
+                    break;
+
+                default:
+                    System.out.println("Please enter a valid choice");
+            }
+        }
+    }
+}
+
+class ATM {
+    public int withdrawMoney(int total_balance) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Please enter your account number:");
+        int account_number = scanner.nextInt();
+
+        System.out.println("Please enter your amount:");
+        int amount = scanner.nextInt();
+
+        System.out.println("Please enter your PIN number:");
+        int pin_number = scanner.nextInt();
+
+        if (amount > 0 && amount <= total_balance) {
+            total_balance -= amount;
+            System.out.println("After withdrawal, your balance is: " + total_balance);
+        } else {
+            System.out.println("Insufficient balance in your account.");
+        }
+        return total_balance;
+    }
+
+    public int depositMoney(int total_balance) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Please enter your account number:");
+        int account_number = scanner.nextInt();
+
+        System.out.println("Please enter your amount:");
+        int amount = scanner.nextInt();
+
+        System.out.println("Please enter your PIN number:");
+        int pin_number = scanner.nextInt();
+
+        if (amount > 0) {
+            total_balance += amount;
+            System.out.println("Your total balance in your account is: " + total_balance);
+        } else {
+            System.out.println("Please enter a valid amount.");
+        }
+        return total_balance;
+    }
+
+    public void checkBalance(int total_balance) {
+        System.out.println("Your current balance is: " + total_balance);
+    }
+
+    public void exit() {
+        System.out.println("Visit again SBI ATM. Have a good day...");
+    }
+}
